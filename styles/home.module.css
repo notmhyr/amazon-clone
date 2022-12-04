@@ -1,0 +1,122 @@
+.home {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1500px;
+}
+.home__swiper {
+  width: 100%;
+  height: 53vh;
+  z-index: 0;
+  margin-bottom: -250px;
+}
+.home__img {
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  object-fit: contain;
+  object-position: top center;
+}
+
+@media (min-width: 980px) {
+  .home__swiper {
+    height: 68vh;
+    min-height: 55vh;
+    max-height: 70vh;
+  }
+  .home__img {
+    object-fit: cover;
+  }
+}
+
+.home__category {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 0.9fr));
+  gap: 1.3rem;
+  padding: 0 0.7rem;
+  row-gap: 1rem;
+  justify-content: center;
+  z-index: 1;
+  margin-bottom: 1.2rem;
+}
+.home__eachCategory {
+  background-color: white;
+  padding: 1rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 1;
+  border-radius: 3px;
+  align-items: flex-start;
+  min-height: 320px;
+  height: fit-content;
+}
+.home__eachCategory h2 {
+  margin: 0;
+  margin-bottom: 0.8rem;
+  font-size: 21px;
+}
+.home__categoryImg {
+  width: 100%;
+  height: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.home__eachCategory a {
+  color: #007185;
+}
+.home__eachCategory a:hover {
+  text-decoration: underline;
+  color: rgb(206, 64, 7);
+}
+
+/* media query for category */
+
+@media (min-width: 768px) {
+  .home__swiper {
+    margin-bottom: -270px;
+  }
+  .home__eachCategory {
+    min-height: 360px;
+  }
+}
+@media (max-width: 480px) {
+  .home__swiper {
+    margin-bottom: -220px;
+    max-height: 380px;
+  }
+}
+
+.home__product {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 0.9fr));
+  /* grid-template-columns: repeat(4, 1fr); */
+  gap: 1.2rem;
+  justify-content: center;
+  padding: 0 0.7rem;
+  margin: 0 auto;
+  grid-auto-flow: row dense;
+  padding-bottom: 1.3rem;
+}
+.errorContainer {
+  min-height: 70vh;
+  padding: 1rem;
+  width: 100%;
+  background-color: #fff;
+}
+.error {
+  width: 100%;
+  color: #ff2c2c;
+  text-align: center;
+  font-size: 1.3rem;
+  word-wrap: break-word;
+}
+
+/* .home__productBanner {
+  width: 100%;
+  object-fit: contain;
+} */

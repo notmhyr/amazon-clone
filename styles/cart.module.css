@@ -1,0 +1,192 @@
+.cart {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 2rem 2.6rem;
+  gap: 1.5rem;
+  justify-content: start;
+  color: #0f1111;
+  text-transform: capitalize;
+}
+
+.cart__products {
+  grid-column: span 3;
+  background-color: #fff;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart__title {
+  width: 100%;
+
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 0.5rem;
+  padding-bottom: 1.8rem;
+  position: relative;
+}
+.cart__title button {
+  background-color: transparent;
+  border: none;
+  color: #007185;
+  padding: 0 0.5rem;
+  font-size: 14px;
+  cursor: pointer;
+}
+.cart__title button:hover {
+  text-decoration: underline;
+}
+.cart__title h2 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.7rem;
+  text-transform: capitalize;
+  line-height: 36px;
+}
+.cart__title span {
+  position: absolute;
+  font-size: 15px;
+  bottom: 4px;
+  right: 0;
+}
+.cart__eachProduct {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 0.6rem;
+  padding: 0.4rem;
+  max-height: 295px;
+}
+
+.cart__productInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  grid-column: span 3;
+  padding: 1rem 0;
+  padding-left: 6px;
+}
+
+.cart__productInfo h5,
+.cart__productInfo p {
+  margin: 0;
+  padding: 0;
+}
+.cart__productInfo h5 {
+  font-size: 18px;
+  line-height: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem;
+}
+.cart__productInfo span {
+  font-size: 0.8rem;
+  color: rgb(139, 139, 139);
+  margin-bottom: 0.8rem;
+}
+.cart__productImg {
+  position: relative;
+  width: 100%;
+  grid-column: span 2;
+}
+
+.cart__productPrice {
+  grid-column: 0.5fr;
+  text-align: right;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.cart__subtotal {
+  grid-column: span 1;
+  background-color: #fff;
+  padding: 1.2rem;
+  height: fit-content;
+  max-height: fit-content;
+  padding: 1.6rem;
+  text-align: center;
+}
+.cart__subtotal button {
+  background-color: #fcd200;
+  border-radius: 8px;
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  font-size: 15px;
+  box-shadow: 0 2px 5px lightgray;
+  border: none;
+  margin-top: 1rem;
+  transition: 0.3s ease background;
+  cursor: pointer;
+  color: #111;
+  min-height: 37px;
+}
+.cart__subtotal button:hover {
+  background-color: #ffda22;
+}
+
+.cart__select {
+  width: 70px;
+  padding: 0.4rem;
+  border-radius: 10px;
+  background-color: #f0f2f2;
+  border: 1px solid #d5d9d9;
+  position: relative;
+  box-shadow: 0 2px 5px lightgray;
+  margin-right: 10px;
+}
+.cart__select span {
+  position: absolute;
+}
+
+.cart__select:focus {
+  outline: rgb(0, 89, 255);
+}
+
+.cart__delete {
+  background-color: transparent;
+  border: none;
+  border-left: 1px solid lightgray;
+  color: #007185;
+  padding: 0 0.5rem;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cart__delete:hover {
+  text-decoration: underline;
+}
+
+.cart__productInfo .cart__productQty {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+  color: #0f1111;
+}
+.cart__total {
+  text-align: right;
+}
+.subtotal {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+@media (max-width: 800px) {
+  .cart {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 1.3rem;
+    gap: 0;
+    row-gap: 1.4rem;
+  }
+  .cart__subtotal {
+    justify-self: center;
+    width: 70%;
+    min-width: 220px;
+  }
+}
+
+@media (max-width: 430px) {
+  .cart__eachProduct {
+    display: flex;
+    flex-direction: column;
+    min-height: fit-content;
+    max-height: fit-content;
+  }
+}

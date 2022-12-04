@@ -1,0 +1,21 @@
+.category {
+  max-width: 1500px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 0.9fr));
+  gap: 1.2rem;
+  justify-content: center;
+  padding: 1.5rem 0.9rem;
+  margin: 0 auto;
+}
+.title_container {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.category__title {
+  text-transform: capitalize;
+  margin: 0;
+  margin-top: 1rem;
+  padding: 0 0.9rem;
+  font-size: 1.8rem;
+}

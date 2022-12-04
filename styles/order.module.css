@@ -1,0 +1,135 @@
+/* style for all orders */
+.container {
+  width: 100%;
+  background-color: #fff;
+}
+.orders {
+  margin: 0 auto;
+  max-width: 850px;
+  padding: 1rem;
+  min-height: 77vh;
+}
+
+.orders h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  border-bottom: 1px solid rgb(224, 146, 0);
+  padding-bottom: 0.6rem;
+}
+.orders h3 {
+  margin: 15px 0;
+  padding-left: 8px;
+  margin-top: 9px;
+  font-weight: 600;
+}
+
+.orders__loading {
+  width: 100%;
+  height: 100%;
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.errorContainer {
+  background-color: #fff;
+  width: 100%;
+  height: 100vh;
+}
+.errorContainer h3 {
+  margin: 0;
+  color: #ff2c2c;
+  text-align: center;
+  padding-top: 3rem;
+}
+
+/* style for each order */
+
+.order {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid #e7e7e7;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.order__col1 {
+  background-color: #e7e7e7;
+  display: flex;
+  padding: 0.9rem;
+  justify-content: space-between;
+}
+
+.order__col1 p {
+  padding: 0;
+  margin: 0;
+  text-transform: capitalize;
+  font-size: 0.8rem;
+}
+.order__col1 .order__headerText {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.order__id {
+  position: absolute;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  top: 6px;
+  right: 6px;
+  width: 14rem;
+}
+
+.order__col1 .order__length {
+  align-self: flex-end;
+  font-size: 1rem;
+  color: #0093ad;
+  text-align: center;
+}
+
+.order__col2 {
+  width: 100%;
+  display: flex;
+  padding: 1rem;
+  align-items: center;
+  background-color: #fff;
+  overflow-x: auto;
+}
+
+.order__col2 img {
+  object-fit: contain;
+  height: 8.5rem;
+  margin-right: 15px;
+}
+
+@media (max-width: 500px) {
+  .orders h1 {
+    font-size: 1.7rem;
+  }
+  .order__col1 p {
+    font-size: 0.7.5rem;
+  }
+  .order__col1 .order__headerText {
+    font-size: 14px;
+  }
+  .order__id {
+    width: 10rem;
+  }
+  .order__col1 .order__length {
+    font-size: 15px;
+  }
+  .order__col2 img {
+    height: 6rem;
+  }
+}
+@media (max-width: 380px) {
+  .order__id {
+    display: none;
+  }
+}
