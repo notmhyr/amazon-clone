@@ -3,7 +3,7 @@ import StoreProvider from "../utils/Store";
 import AuthProvider from "../utils/auth";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import LoadingIcon from "../components/loading";
+import LoadingIcon from "../components/Loading";
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);

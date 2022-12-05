@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Auth } from "../utils/auth";
-import Loading from "../components/Loading";
 import { RotatingLines } from "react-loader-spinner";
 function Signin() {
   const router = useRouter();
