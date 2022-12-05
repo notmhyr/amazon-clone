@@ -55,7 +55,6 @@ function reducer(state, action) {
 
 export default function StoreProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
   const value = { state, dispatch };
   // useEffect(() => {
   //   const storage = JSON.parse(localStorage.getItem("cart"));

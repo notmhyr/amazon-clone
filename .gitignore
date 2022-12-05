@@ -12,9 +12,6 @@
 /.next/
 /out/
 
-#midlleware
-/midlleware
-
 # production
 /build
 
