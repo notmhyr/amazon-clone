@@ -10,7 +10,9 @@ import axios from "axios";
 function Orders() {
   const { user, dispatch } = useContext(Auth);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+  console.log(data);
 
   useEffect(() => {
     async function fetcher() {
@@ -26,7 +28,11 @@ function Orders() {
           setData(res.data);
           setIsLoading(false);
         } catch (error) {
-          console.log(error.message);
+          if (error.response.status === 400) {
+            setError("We're sorry, but we're unable to serve your request.");
+            setIsLoading(false);
+          }
+          console.log(error);
         }
       }
     }
@@ -35,6 +41,7 @@ function Orders() {
   }, [user?.accessToken]);
 
   async function fetchNewToken(token, email) {
+    console.log("new token run");
     try {
       const newAccessToken = await axios.post("/api/auth/refresh-token", {
         token,
@@ -51,10 +58,12 @@ function Orders() {
 
   axiosAuth.interceptors.request.use(
     async (config) => {
+      console.log(`interceptors runs`);
       const userInLocalStorage = JSON.parse(localStorage.getItem("user"));
 
       let currentDate = new Date();
       const decodedToken = jwt_decode(userInLocalStorage.accessToken);
+      console.log(decodedToken.exp * 1000 < currentDate.getTime());
       if (decodedToken.exp * 1000 < currentDate.getTime()) {
         console.log(`exp is smaller`);
         const data = fetchNewToken(
@@ -72,7 +81,7 @@ function Orders() {
   );
 
   return (
-    <Layout>
+    <Layout title="Orders">
       <div className={style.container}>
         <div className={style.orders}>
           <h1>Your Orders</h1>
@@ -91,6 +100,8 @@ function Orders() {
             </div>
           ) : !user ? (
             <h3>not logged in </h3>
+          ) : error ? (
+            <h3 className={style.error}>{error}</h3>
           ) : data?.length === 0 ? (
             <h3>you have no orders</h3>
           ) : (

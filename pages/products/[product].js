@@ -5,14 +5,12 @@ import { useContext } from "react";
 import { Store } from "../../utils/Store";
 import Header from "../../components/Header";
 function Product({ product }) {
-  console.log(product);
   const { rate, count } = product.rating;
   const roundedRating = Math.floor(rate);
   const ratingArray = Array(roundedRating).fill();
   const { state, dispatch } = useContext(Store);
 
   const addToHandler = () => {
-    console.log("add to runs");
     const existItem = state.cart.cartItems.find(
       (item) => item.id === product.id
     );

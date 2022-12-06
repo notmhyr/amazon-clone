@@ -17,6 +17,15 @@
   object-position: top center;
 }
 
+@media (max-height: 615px) and (orientation: landscape) {
+  .home__swiper {
+    display: none;
+  }
+  .home__category {
+    margin-top: 1rem;
+  }
+}
+
 @media (min-width: 980px) {
   .home__swiper {
     height: 68vh;

@@ -16,12 +16,18 @@ function Signin() {
     formState: { errors },
   } = useForm();
   const [eye, setEye] = useState(false);
-  const { login, error, isLoading } = useLogin();
+  const [error, setError] = useState(null);
+  const { login, isLoading } = useLogin();
   const { user } = useContext(Auth);
 
   const submitHandler = async ({ email, password }) => {
-    await login(email, password);
-    router.replace("/");
+    const res = await login(email, password);
+    if (res.success) {
+      router.replace("/");
+    }
+    if (res.error) {
+      setError(res.error);
+    }
   };
   if (user) {
     router.replace("/");

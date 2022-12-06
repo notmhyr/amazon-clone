@@ -58,6 +58,13 @@
   margin-bottom: 1rem;
 }
 
+.error {
+  margin: 0;
+  color: #ff2c2c;
+  text-align: center;
+  font-size: 1rem;
+  padding-top: 1.3rem;
+}
 .order__col1 {
   background-color: #e7e7e7;
   display: flex;

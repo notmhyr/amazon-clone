@@ -22,6 +22,7 @@ function useLogin() {
     if (!response.ok) {
       setError(data.error);
       setIsLoading(false);
+      return { error: data.error, success: false };
     }
 
     if (response.ok) {
@@ -30,10 +31,11 @@ function useLogin() {
       dispatch({ type: "LOGIN", payload: data });
 
       setIsLoading(false);
+      return { error: null, success: true };
     }
   };
 
-  return { login, error, isLoading };
+  return { login, isLoading };
 }
 
 export default useLogin;

@@ -19,7 +19,7 @@ async function connect() {
   try {
     console.log("connecting to db...");
     const db = mongoose.connect(process.env.MONGODB_URI);
-    console.log("connected to mongodb");
+    console.log("connected to mongodb: ");
   } catch (error) {
     console.log(error);
   }

@@ -37,7 +37,8 @@ const handler = async (req, res) => {
       throw Error("you have no orders");
     }
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.log(`error for orders: ${error}`);
+    res.status(400).send({ error: error });
   }
 };
 
