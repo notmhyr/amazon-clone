@@ -21,11 +21,12 @@ function Signup() {
   const [error, setError] = useState(null);
   const router = useRouter();
   const { user } = useContext(Auth);
+  const { redirect } = router.query;
 
   const submitHandler = async ({ name, email, password }) => {
     const res = await signUp(name, email, password);
     if (res.success) {
-      router.replace("/");
+      router.replace(redirect || "/");
     }
     if (res.error) {
       setError(res.error);
@@ -33,7 +34,7 @@ function Signup() {
   };
 
   if (user) {
-    router.replace("/");
+    router.replace(redirect || "/");
     return <h3 style={{ textAlign: "center" }}>you are logged in</h3>;
   }
   return (

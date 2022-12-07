@@ -12,27 +12,21 @@ function Orders() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
-  console.log(data);
 
   useEffect(() => {
     async function fetcher() {
       if (user) {
         try {
           setIsLoading(true);
-          const res = await axiosAuth.get("/api/orders", {
-            headers: {
-              authorization: `Bearer ${user?.accessToken}`,
-            },
-          });
+          const res = await axiosAuth.get("/api/orders");
 
           setData(res.data);
           setIsLoading(false);
         } catch (error) {
-          if (error.response.status === 400) {
+          if (error?.response?.status === 400) {
             setError("We're sorry, but we're unable to serve your request.");
             setIsLoading(false);
           }
-          console.log(error);
         }
       }
     }
@@ -40,11 +34,25 @@ function Orders() {
     fetcher();
   }, [user?.accessToken]);
 
-  async function fetchNewToken(token, email) {
-    console.log("new token run");
+  // for getting data from local storage
+
+  function getLocalStorage() {
+    if (typeof window !== "undefined") {
+      const userInLocalStorage = JSON.parse(localStorage.getItem("user"));
+
+      return {
+        email: userInLocalStorage.email,
+        accessToken: userInLocalStorage.accessToken,
+        refreshToken: userInLocalStorage.refreshToken,
+      };
+    }
+  }
+
+  async function fetchNewToken() {
     try {
+      const { email, refreshToken } = getLocalStorage();
       const newAccessToken = await axios.post("/api/auth/refresh-token", {
-        token,
+        token: refreshToken,
         email,
       });
 
@@ -53,29 +61,64 @@ function Orders() {
       return newAccessToken.data;
     } catch (err) {
       console.log(err);
+      Promise.reject(err);
     }
   }
 
-  axiosAuth.interceptors.request.use(
-    async (config) => {
-      console.log(`interceptors runs`);
-      const userInLocalStorage = JSON.parse(localStorage.getItem("user"));
+  // axiosAuth.interceptors.request.use(
+  //   async (config) => {
+  //     console.log(`interceptors runs`);
+  //     const userInLocalStorage = JSON.parse(localStorage.getItem("user"));
 
-      let currentDate = new Date();
-      const decodedToken = jwt_decode(userInLocalStorage.accessToken);
-      console.log(decodedToken.exp * 1000 < currentDate.getTime());
-      if (decodedToken.exp * 1000 < currentDate.getTime()) {
-        console.log(`exp is smaller`);
-        const data = fetchNewToken(
-          userInLocalStorage.refreshToken,
-          userInLocalStorage.email
-        );
-        config.headers["authorization"] = `Bearer ${data.accessToken}`;
+  //     let currentDate = new Date();
+  //     const decodedToken = jwt_decode(userInLocalStorage.accessToken);
+  //     console.log(decodedToken.exp * 1000 < currentDate.getTime());
+  //     if (decodedToken.exp * 1000 < currentDate.getTime()) {
+  //       console.log(`exp is smaller`);
+  //       const data = fetchNewToken(
+  //         userInLocalStorage.refreshToken,
+  //         userInLocalStorage.email
+  //       );
+  //       config.headers["authorization"] = `Bearer ${data.accessToken}`;
+  //     }
+  //     return config;
+  //   },
+  //   (error) => {
+  //     console.log(`promise rejected here with this error ${error}`);
+  //     return Promise.reject(error);
+  //   }
+  // );
+
+  axiosAuth.interceptors.request.use(
+    (config) => {
+      const { accessToken } = getLocalStorage();
+      if (accessToken) {
+        config.headers["authorization"] = `Bearer ${accessToken}`;
       }
       return config;
     },
     (error) => {
-      console.log(`promise rejected here with this error ${error}`);
+      Promise.reject(error);
+    }
+  );
+
+  axiosAuth.interceptors.response.use(
+    async (res) => {
+      return res;
+    },
+    async (error) => {
+      const originalConfig = error.config;
+      if (error.response) {
+        //access token expired
+        if (error.response.status === 403 && !originalConfig._retry) {
+          // handle infinite loop
+          originalConfig._retry = true;
+
+          fetchNewToken();
+          return axiosAuth(originalConfig);
+        }
+      }
+
       return Promise.reject(error);
     }
   );

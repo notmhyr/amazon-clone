@@ -10,6 +10,7 @@ import { Auth } from "../utils/auth";
 import { RotatingLines } from "react-loader-spinner";
 function Signin() {
   const router = useRouter();
+  const { redirect } = router.query;
   const {
     handleSubmit,
     register,
@@ -23,14 +24,14 @@ function Signin() {
   const submitHandler = async ({ email, password }) => {
     const res = await login(email, password);
     if (res.success) {
-      router.replace("/");
+      router.replace(redirect || "/");
     }
     if (res.error) {
       setError(res.error);
     }
   };
   if (user) {
-    router.replace("/");
+    router.replace(redirect || "/");
     return <h3 style={{ textAlign: "center" }}>you are logged in</h3>;
   }
   return (
@@ -110,7 +111,12 @@ function Signin() {
           <h5>New to Amazon?</h5>
         </div>
         <Link href="/signup">
-          <button className={style.login__createAccount}>
+          <button
+            className={style.login__createAccount}
+            onClick={() =>
+              router.push(redirect ? `/signup?redirect=${redirect}` : "/signup")
+            }
+          >
             create your amazon account
           </button>
         </Link>

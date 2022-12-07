@@ -1,32 +1,29 @@
 import mongoose from "mongoose";
 
-const connection = {};
-
 async function connect() {
-  if (connection.isConnected) {
+  console.log(mongoose.connection.readyState === 1);
+  console.log(mongoose.connection.readyState);
+
+  if (mongoose.connection.readyState === 2) {
+    mongoose.connection.readyState = 0;
+  }
+  if (mongoose.connection.readyState === 1) {
     console.log("it's already connected");
     return;
   }
-  if (mongoose.connections.length > 0) {
-    connection.isConnected = mongoose.connections[0].readyState;
-    if (connection.isConnected === 1) {
-      console.log("previously connected");
-      return;
+  if (mongoose.connection.readyState === 0) {
+    try {
+      console.log("connecting to db...");
+      const db = mongoose.connect(process.env.MONGODB_URI);
+      console.log("connected to mongodb: " + mongoose.connection.readyState);
+    } catch (error) {
+      console.log(error);
     }
-    await mongoose.disconnect();
-  }
-
-  try {
-    console.log("connecting to db...");
-    const db = mongoose.connect(process.env.MONGODB_URI);
-    console.log("connected to mongodb: ");
-  } catch (error) {
-    console.log(error);
   }
 }
 
 async function disconnect() {
-  if (connection.isConnected) {
+  if (mongoose.connection.readyState === 1) {
     if (process.env.NODE_ENV === "production") {
       await mongoose.disconnect();
       connection.isConnected(false);
@@ -35,7 +32,6 @@ async function disconnect() {
     }
   }
 }
-
 const db = { connect, disconnect };
 
 export default db;

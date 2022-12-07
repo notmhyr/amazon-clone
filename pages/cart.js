@@ -7,6 +7,8 @@ import Link from "next/link";
 import { loadStripe } from "@stripe/stripe-js";
 import { Auth } from "../utils/auth";
 import { RotatingLines } from "react-loader-spinner";
+import { useRouter } from "next/router";
+
 const stripePromise = loadStripe(process.env.stripe_public_key);
 
 let numOfOption = [];
@@ -21,6 +23,7 @@ function Cart() {
   const [loading, setLoading] = useState(false);
   const { state, dispatch } = useContext(Store);
   const { cart } = state;
+  const router = useRouter();
 
   async function createCheckoutSession() {
     setLoading(true);
@@ -37,17 +40,7 @@ function Cart() {
     });
 
     const data = await res.json();
-    // const checkoutResponse = await axios.post(
-    //   "/api/create-checkout-session",
-    //   {
-    //     items: cart.cartItems,
-    //     email: user.email,
-    //   }
-    // );
 
-    // console.log(
-    //   "this is the response " + JSON.stringify(checkoutResponse.data)
-    // );
     if (!res.ok) {
       setLoading(false);
       setError(data.error);
@@ -184,10 +177,12 @@ function Cart() {
                     visible={true}
                   />
                 ) : (
-                  "proceed to checkout"
+                  <div>proceed to checkout</div>
                 )
               ) : (
-                "sign in to checkout"
+                <div onClick={() => router.push("/signin?redirect=/cart")}>
+                  sign in to checkout
+                </div>
               )}
             </button>
             {error && <p className="error"> {error}</p>}

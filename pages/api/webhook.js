@@ -9,7 +9,6 @@ const endPointSecret = process.env.STRIPE_SIGNIN_SECRET;
 const pushOrderToDb = async (session) => {
   await db.connect();
   console.log("running push to db function");
-  console.log(typeof session.id);
   const user = await User.findOne({ email: session.metadata.email });
 
   if (user) {

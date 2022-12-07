@@ -13,10 +13,11 @@ const handler = async (req, res) => {
     await db.connect();
     const { token, email } = req.body;
     const user = await User.findOne({ email });
-    if (user.refreshToken !== token)
+    if (user.refreshToken !== token) {
       res
         .status(400)
         .json({ error: "UnAuthorized", message: "not match to db" });
+    }
     const { _id } = jwt.verify(token, process.env.JWT_REFRESH_TOKEN);
     const accessToken = jwt.sign({ _id }, process.env.JWT_SECRET, {
       expiresIn: "15m",
