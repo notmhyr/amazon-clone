@@ -1,37 +1,39 @@
 import mongoose from "mongoose";
+const connection = {};
 
 async function connect() {
-  console.log(mongoose.connection.readyState === 1);
-  console.log(mongoose.connection.readyState);
+  console.log("ready state: " + mongoose.connection.readyState === 1);
 
-  if (mongoose.connection.readyState === 2) {
-    mongoose.connection.readyState = 0;
-  }
-  if (mongoose.connection.readyState === 1) {
-    console.log("it's already connected");
+  if (connection.isConnected) {
+    console.log("its connected");
     return;
   }
-  if (mongoose.connection.readyState === 0) {
-    try {
-      console.log("connecting to db...");
-      const db = mongoose.connect(process.env.MONGODB_URI);
-      console.log("connected to mongodb: " + mongoose.connection.readyState);
-    } catch (error) {
-      console.log(error);
+  // if already a connection does exist
+  if (mongoose.connections.length > 0) {
+    connection.isConnected = mongoose.connections[0].readyState;
+    if (connection.isConnected === 1) {
+      console.log("previously connected");
+      return;
     }
+    await mongoose.disconnect();
+  }
+  //new connection
+  const options = {
+    connectTimeoutMS: 20000,
+    family: 4,
+  };
+
+  try {
+    mongoose.connect(process.env.MONGODB_URI, options, () => {
+      console.log("new connection");
+      console.log(mongoose.connection.readyState);
+      connection.isConnected = mongoose.connections[0].readyState;
+    });
+  } catch (error) {
+    console.log(`error accord in db: ${error}`);
   }
 }
 
-async function disconnect() {
-  if (mongoose.connection.readyState === 1) {
-    if (process.env.NODE_ENV === "production") {
-      await mongoose.disconnect();
-      connection.isConnected(false);
-    } else {
-      console.log("not disconnected");
-    }
-  }
-}
-const db = { connect, disconnect };
+const db = { connect };
 
 export default db;

@@ -65,30 +65,6 @@ function Orders() {
     }
   }
 
-  // axiosAuth.interceptors.request.use(
-  //   async (config) => {
-  //     console.log(`interceptors runs`);
-  //     const userInLocalStorage = JSON.parse(localStorage.getItem("user"));
-
-  //     let currentDate = new Date();
-  //     const decodedToken = jwt_decode(userInLocalStorage.accessToken);
-  //     console.log(decodedToken.exp * 1000 < currentDate.getTime());
-  //     if (decodedToken.exp * 1000 < currentDate.getTime()) {
-  //       console.log(`exp is smaller`);
-  //       const data = fetchNewToken(
-  //         userInLocalStorage.refreshToken,
-  //         userInLocalStorage.email
-  //       );
-  //       config.headers["authorization"] = `Bearer ${data.accessToken}`;
-  //     }
-  //     return config;
-  //   },
-  //   (error) => {
-  //     console.log(`promise rejected here with this error ${error}`);
-  //     return Promise.reject(error);
-  //   }
-  // );
-
   axiosAuth.interceptors.request.use(
     (config) => {
       const { accessToken } = getLocalStorage();

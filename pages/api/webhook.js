@@ -21,7 +21,6 @@ const pushOrderToDb = async (session) => {
         session_id: session.id,
       });
       const order = await newOrder.save();
-      await db.disconnect();
       console.log(`Success order: ${session.id} has been added to DB`);
       return order;
     } catch (error) {

@@ -53,7 +53,6 @@ userSchema.statics.signup = async function (name, email, password) {
   const hash = await bcrypt.hash(password, salt);
 
   const user = await this.create({ name, email, password: hash });
-  await db.disconnect();
   return user;
 };
 
@@ -65,7 +64,6 @@ userSchema.statics.login = async function (email, password) {
   await db.connect();
 
   const user = await this.findOne({ email });
-  await db.disconnect();
   if (!user) {
     throw Error("Incorrect email");
   }

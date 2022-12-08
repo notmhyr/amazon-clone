@@ -6,14 +6,12 @@ import moment from "moment";
 const handler = async (req, res) => {
   console.log("function is running");
   const { _id } = req.user;
+  await db.connect();
   try {
-    await db.connect();
-
     const stripeOrders = await Order.find({ user: _id }).sort({
       createdAt: -1,
     });
 
-    await db.disconnect();
     if (stripeOrders) {
       const orders = await Promise.all(
         stripeOrders.map(async (order) => {

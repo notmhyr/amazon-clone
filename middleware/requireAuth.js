@@ -23,7 +23,6 @@ const requireAuth = (handler) => {
       }
 
       req.user = user;
-      await db.disconnect();
 
       return handler(req, res);
     } catch (error) {
