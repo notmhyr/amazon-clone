@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import StoreProvider from "../utils/Store";
 import AuthProvider from "../utils/auth";
 import { useRouter } from "next/router";

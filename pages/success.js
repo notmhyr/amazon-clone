@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import style from "../styles/success.module.css";
+import style from "../styles/success.module.scss";
 import { FaCheckCircle } from "react-icons/fa";
 import Header from "../components/Header";
 import Link from "next/link";

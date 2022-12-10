@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import Product from "../../components/Product";
-import style from "../../styles/category.module.css";
+import style from "../../styles/category.module.scss";
 
 function Category({ products }) {
   const router = useRouter();

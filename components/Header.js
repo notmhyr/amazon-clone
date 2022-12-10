@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import style from "../styles/header.module.css";
+import style from "../styles/header.module.scss";
 import { AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
 import { HiOutlineMenu } from "react-icons/hi";
 import { Store } from "../utils/Store";

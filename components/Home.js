@@ -3,7 +3,7 @@ import "swiper/css";
 import { Autoplay, Navigation, EffectFade } from "swiper";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
-import style from "../styles/home.module.css";
+import style from "../styles/home.module.scss";
 import Image from "next/image";
 import data from "../utils/slider";
 import Link from "next/link";

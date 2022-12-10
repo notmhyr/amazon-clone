@@ -1,4 +1,4 @@
-import style from "../styles/product.module.css";
+import style from "../styles/product.module.scss";
 import { IoStar } from "react-icons/io5";
 import { useContext } from "react";
 import { Store } from "../utils/Store";

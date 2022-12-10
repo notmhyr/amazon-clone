@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import style from "../styles/order.module.css";
+import style from "../styles/order.module.scss";
 import { Auth, axiosAuth } from "../utils/auth";
 import Order from "../components/order";
 import { Oval } from "react-loader-spinner";

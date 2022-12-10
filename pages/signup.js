@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import style from "../styles/auth.module.css";
+import style from "../styles/auth.module.scss";
 import { useForm } from "react-hook-form";
 import useSignup from "../hooks/useSignup";
 import Link from "next/link";
@@ -40,7 +40,9 @@ function Signup() {
   return (
     <div className={style.container}>
       <div className={style.login}>
-        <img src="images/amazon-logo.png" alt="amazon logo" />
+        <Link href="/">
+          <img src="images/amazon-logo.png" alt="amazon logo" />
+        </Link>
         <form
           className={style.login__form}
           onSubmit={handleSubmit(submitHandler)}

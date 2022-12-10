@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import style from "../../styles/productDetail.module.css";
+import style from "../../styles/productDetail.module.scss";
 import { IoStar } from "react-icons/io5";
 import { useContext } from "react";
 import { Store } from "../../utils/Store";

@@ -1,4 +1,4 @@
-import style from "../styles/order.module.css";
+import style from "../styles/order.module.scss";
 import moment from "moment";
 // { amount, amount_shipping, images, items, timestamps, _id }
 function Order({ order }) {

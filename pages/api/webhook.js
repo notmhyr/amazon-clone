@@ -33,6 +33,7 @@ const pushOrderToDb = async (session) => {
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
+    console.log("webhook handler running");
     const requestBuffer = await buffer(req);
     const payload = requestBuffer.toString();
     const sig = req.headers["stripe-signature"];
@@ -52,7 +53,7 @@ export default async function handler(req, res) {
     if (event.type === "checkout.session.completed") {
       const session = event.data.object;
       //push the order to database
-      return pushOrderToDb(session);
+      pushOrderToDb(session);
     }
   }
 }

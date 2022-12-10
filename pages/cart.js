@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import Layout from "../components/Layout";
 import { Store } from "../utils/Store";
 import Image from "next/image";
-import style from "../styles/cart.module.css";
+import style from "../styles/cart.module.scss";
 import Link from "next/link";
 import { loadStripe } from "@stripe/stripe-js";
 import { Auth } from "../utils/auth";
