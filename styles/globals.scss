@@ -23,6 +23,13 @@ input {
   box-sizing: border-box;
 }
 
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}
 .swiper-button-prev,
 .swiper-button-next {
   top: 20% !important;
